@@ -12,17 +12,17 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from app.dashboard.components import render_page_header
 from app.dashboard.results_view import render_empty_results
-from app.dashboard.upload_view import render_upload_placeholder
+from app.dashboard.upload_view import render_resume_uploader
 from app.data.database import initialize_database
 
 
 def main() -> None:
-    """Configure and render the Phase 1 application shell."""
+    """Configure and render the ResumeIQ application shell."""
     st.set_page_config(page_title="ResumeIQ", page_icon="📄", layout="wide")
     initialize_database()
 
     render_page_header()
-    render_upload_placeholder()
+    render_resume_uploader()
     render_empty_results()
 
 

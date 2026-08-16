@@ -7,4 +7,4 @@ def render_page_header() -> None:
     """Render the application title and current development status."""
     st.title("ResumeIQ")
     st.caption("AI-powered resume insights for students")
-    st.info("Foundation setup is complete. Resume analysis features will be added in upcoming phases.")
+    st.info("Upload a PDF resume to extract and preview its text. Analysis features will be added in later phases.")

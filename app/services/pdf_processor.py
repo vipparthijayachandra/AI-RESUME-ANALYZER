@@ -18,7 +18,7 @@ def extract_text(pdf_file: BinaryIO) -> str:
     try:
         with fitz.open(stream=content, filetype="pdf") as document:
             text = "\n".join(page.get_text("text") for page in document)
-    except (fitz.FileDataError, RuntimeError) as error:
+    except (fitz.FileDataError, RuntimeError, ValueError, OSError) as error:
         raise ValueError("The uploaded file could not be read as a PDF.") from error
 
     if not text.strip():
