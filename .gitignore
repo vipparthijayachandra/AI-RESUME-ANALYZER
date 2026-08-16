@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+data/resumeiq.db
+.env
+.streamlit/secrets.toml
