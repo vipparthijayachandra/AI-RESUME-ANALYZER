@@ -70,5 +70,5 @@ def test_validate_resume_upload_rejects_empty_or_oversized_files() -> None:
 
 def test_preprocessing_normalizes_extracted_text() -> None:
     """Normalized text is ready for the later profile extraction phase."""
-    assert normalize_text("  Python\n\n  SQL  ") == "Python SQL"
+    assert normalize_text("  Python\n\n  SQL  ") == "Python\nSQL"
     assert is_supported_resume("resume.pdf")

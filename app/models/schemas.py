@@ -13,9 +13,10 @@ class JobRole:
 
 @dataclass
 class ResumeProfile:
-    """Structured resume data to be populated by the parser in Phase 4."""
+    """Structured information extracted from a student's resume."""
 
     skills: list[str] = field(default_factory=list)
     education: list[str] = field(default_factory=list)
     projects: list[str] = field(default_factory=list)
     experience: list[str] = field(default_factory=list)
+    certifications: list[str] = field(default_factory=list)
