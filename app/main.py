@@ -11,10 +11,16 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from app.dashboard.components import render_page_header
-from app.dashboard.results_view import render_ats_score, render_empty_results, render_profile_summary
+from app.dashboard.results_view import (
+    render_ats_score,
+    render_empty_results,
+    render_profile_summary,
+    render_role_matches,
+)
 from app.dashboard.upload_view import render_resume_uploader
 from app.data.database import initialize_database
 from app.services.ats_scorer import calculate_score
+from app.services.role_matcher import recommend_roles
 
 
 def main() -> None:
@@ -29,6 +35,7 @@ def main() -> None:
     else:
         render_profile_summary(profile)
         render_ats_score(calculate_score(profile))
+        render_role_matches(recommend_roles(profile))
 
 
 if __name__ == "__main__":

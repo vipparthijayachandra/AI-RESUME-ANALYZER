@@ -39,3 +39,13 @@ class ATSScoreResult:
 
     total_score: int
     categories: tuple[ScoreCategory, ...]
+
+
+@dataclass(frozen=True)
+class RoleMatchResult:
+    """An explainable comparison between a resume and one role's requirements."""
+
+    role_name: str
+    match_percentage: int
+    matching_skills: tuple[str, ...]
+    missing_skills: tuple[str, ...]

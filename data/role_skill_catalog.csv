@@ -1,1 +1,24 @@
 role_name,skill_name,is_required
+Python Developer,Python,true
+Python Developer,SQL,true
+Python Developer,Git,true
+Python Developer,Flask,true
+Python Developer,Django,true
+Python Developer,Docker,true
+Data Analyst,Python,true
+Data Analyst,SQL,true
+Data Analyst,Pandas,true
+Data Analyst,NumPy,true
+Data Analyst,Excel,true
+Data Analyst,Power BI,true
+Machine Learning Intern,Python,true
+Machine Learning Intern,Pandas,true
+Machine Learning Intern,NumPy,true
+Machine Learning Intern,Scikit-learn,true
+Machine Learning Intern,Machine Learning,true
+Machine Learning Intern,TensorFlow,true
+Frontend Developer,HTML,true
+Frontend Developer,CSS,true
+Frontend Developer,JavaScript,true
+Frontend Developer,React,true
+Frontend Developer,Git,true

@@ -72,6 +72,15 @@ SKILL_ALIASES = {
 }
 
 
+def normalize_skill_name(skill_name: str) -> str | None:
+    """Return the Phase 4 canonical name for a known skill alias."""
+    cleaned = skill_name.strip()
+    for canonical_name, aliases in SKILL_ALIASES.items():
+        if any(re.fullmatch(re.escape(alias), cleaned, re.IGNORECASE) for alias in aliases):
+            return canonical_name
+    return None
+
+
 def _clean_line(line: str) -> str:
     """Remove list markers without changing the resume's stated content."""
     return re.sub(r"^[\s•*\-–—]+", "", line).strip()
