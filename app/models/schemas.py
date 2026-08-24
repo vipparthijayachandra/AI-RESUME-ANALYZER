@@ -20,3 +20,22 @@ class ResumeProfile:
     projects: list[str] = field(default_factory=list)
     experience: list[str] = field(default_factory=list)
     certifications: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class ScoreCategory:
+    """One transparent contribution to an ATS-style score."""
+
+    name: str
+    points: int
+    maximum_points: int
+    rationale: str
+    improvement_tip: str
+
+
+@dataclass(frozen=True)
+class ATSScoreResult:
+    """An explainable resume score and its category-level breakdown."""
+
+    total_score: int
+    categories: tuple[ScoreCategory, ...]
