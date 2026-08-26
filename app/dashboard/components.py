@@ -4,7 +4,7 @@ import streamlit as st
 
 
 def render_page_header() -> None:
-    """Render the application title and current development status."""
+    """Render the ResumeIQ dashboard header."""
     st.title("ResumeIQ")
-    st.caption("AI-powered resume insights for students")
-    st.info("Upload a PDF resume to extract and preview its text. Analysis features will be added in later phases.")
+    st.caption("Resume analysis for student placement preparation")
+    st.info("Upload a PDF resume to review your profile, ATS-style score, and role-skill alignment.")

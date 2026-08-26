@@ -15,6 +15,7 @@ from app.dashboard.results_view import (
     render_ats_score,
     render_empty_results,
     render_profile_summary,
+    render_skill_gaps,
     render_role_matches,
 )
 from app.dashboard.upload_view import render_resume_uploader
@@ -35,7 +36,9 @@ def main() -> None:
     else:
         render_profile_summary(profile)
         render_ats_score(calculate_score(profile))
-        render_role_matches(recommend_roles(profile))
+        role_matches = recommend_roles(profile)
+        render_role_matches(role_matches)
+        render_skill_gaps(role_matches)
 
 
 if __name__ == "__main__":

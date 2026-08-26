@@ -15,15 +15,17 @@ def render_resume_uploader() -> ResumeProfile | None:
     Returns the extracted profile, or ``None`` when there is no valid uploaded
     document.
     """
-    st.subheader("Upload resume")
-    uploaded_file = st.file_uploader(
-        "Choose a PDF resume",
-        type=["pdf"],
-        help="Upload a text-based PDF resume up to 10 MB.",
-    )
+    with st.container(border=True):
+        st.subheader("Upload resume")
+        st.caption("Upload a text-based PDF resume up to 10 MB.")
+        uploaded_file = st.file_uploader(
+            "Choose a PDF resume",
+            type=["pdf"],
+            help="Only PDF resumes can be analyzed.",
+        )
 
     if uploaded_file is None:
-        st.caption("Only PDF resumes up to 10 MB are accepted.")
+        st.info("Choose a PDF resume to begin the analysis.")
         return None
 
     try:
@@ -35,8 +37,8 @@ def render_resume_uploader() -> ResumeProfile | None:
         st.error(str(error))
         return None
 
-    st.success(f"Extracted readable text from {uploaded_file.name}.")
-    st.caption("The text has been normalized and is ready for profile extraction in Phase 4.")
+    st.success(f"Resume processed successfully: {uploaded_file.name}")
+    st.caption("The extracted text is shown below, followed by your analysis results.")
     with st.expander("Preview extracted resume text", expanded=True):
         st.text_area(
             "Extracted text",
