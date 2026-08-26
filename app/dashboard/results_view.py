@@ -2,7 +2,7 @@
 
 import streamlit as st
 
-from app.models.schemas import ATSScoreResult, ResumeProfile, RoleMatchResult
+from app.models.schemas import ATSScoreResult, ResumeProfile, RoleMatchResult, SkillRecommendation
 
 
 def _render_profile_items(title: str, items: list[str]) -> None:
@@ -112,6 +112,31 @@ def render_skill_gaps(role_matches: list[RoleMatchResult]) -> None:
                     role_match.missing_skills,
                     "No required skills are missing for this role.",
                 )
+
+
+def render_skill_recommendations(
+    recommendations: list[SkillRecommendation], has_role_matches: bool
+) -> None:
+    """Display catalog-backed skills to develop without subjective claims."""
+    st.subheader("E. Skills to Develop")
+    st.caption("Priority reflects how many supported matched roles require the missing skill.")
+
+    if not has_role_matches:
+        st.info("Skills to develop will appear when supported role matches are available.")
+        return
+
+    if not recommendations:
+        st.success("No additional required skills are currently identified from the supported roles.")
+        return
+
+    for index, recommendation in enumerate(recommendations, start=1):
+        with st.container(border=True):
+            skill_column, priority_column = st.columns((3, 1))
+            with skill_column:
+                st.markdown(f"#### {index}. {recommendation.skill_name}")
+                st.caption(f"Useful for: {', '.join(recommendation.roles)}")
+            with priority_column:
+                st.metric("Priority", recommendation.priority)
 
 
 def render_empty_results() -> None:

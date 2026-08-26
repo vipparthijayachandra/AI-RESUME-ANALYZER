@@ -16,12 +16,14 @@ from app.dashboard.results_view import (
     render_empty_results,
     render_profile_summary,
     render_skill_gaps,
+    render_skill_recommendations,
     render_role_matches,
 )
 from app.dashboard.upload_view import render_resume_uploader
 from app.data.database import initialize_database
 from app.services.ats_scorer import calculate_score
 from app.services.role_matcher import recommend_roles
+from app.services.skill_recommender import recommend_skills
 
 
 def main() -> None:
@@ -39,6 +41,10 @@ def main() -> None:
         role_matches = recommend_roles(profile)
         render_role_matches(role_matches)
         render_skill_gaps(role_matches)
+        render_skill_recommendations(
+            recommend_skills(profile, role_matches),
+            has_role_matches=bool(role_matches),
+        )
 
 
 if __name__ == "__main__":

@@ -49,3 +49,12 @@ class RoleMatchResult:
     match_percentage: int
     matching_skills: tuple[str, ...]
     missing_skills: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class SkillRecommendation:
+    """A catalog-backed missing skill prioritized across matched roles."""
+
+    skill_name: str
+    priority: int
+    roles: tuple[str, ...]
