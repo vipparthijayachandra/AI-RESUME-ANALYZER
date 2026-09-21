@@ -4,15 +4,76 @@ import streamlit as st
 
 from app.models.schemas import ATSScoreResult, ResumeProfile, RoleMatchResult, SkillRecommendation
 
+def _render_education(items: list[str]) -> None:
+    """Render education information as grouped academic entries."""
 
+    education_text = "\n".join(items)
+
+    # Detect the common education blocks from the extracted resume text.
+    degree_markers = (
+        "b.sc",
+        "b.sc.",
+        "btech",
+        "b.tech",
+        "b.e",
+        "b.e.",
+        "m.sc",
+        "m.sc.",
+        "mtech",
+        "m.tech",
+        "m.e",
+        "m.e.",
+        "12th",
+        "10th",
+        "intermediate",
+        "ssc",
+    )
+
+    entries: list[list[str]] = []
+    current_entry: list[str] = []
+
+    for item in items:
+        cleaned = item.strip()
+
+        is_new_degree = cleaned.casefold().startswith(degree_markers)
+
+        if is_new_degree and current_entry:
+            entries.append(current_entry)
+            current_entry = []
+
+        current_entry.append(cleaned)
+
+    if current_entry:
+        entries.append(current_entry)
+
+    for entry in entries:
+        with st.container(border=True):
+
+            first_line = entry[0]
+
+            st.markdown(
+                f"**🎓 {first_line}**"
+            )
+
+            for line in entry[1:]:
+                st.markdown(
+                    f"&nbsp;&nbsp;&nbsp;{line}",
+                    unsafe_allow_html=True,
+                )        
 def _render_profile_items(title: str, items: list[str]) -> None:
     """Render a profile field without implying information was found."""
-    st.markdown(f"#### {title}")
-    if items:
-        st.markdown("\n".join(f"- {item}" for item in items))
-    else:
-        st.caption(f"No {title.lower()} detected.")
 
+    st.markdown(f"#### {title}")
+
+    if not items:
+        st.caption(f"No {title.lower()} detected.")
+        return
+
+    if title == "Education":
+        _render_education(items)
+        return
+
+    st.markdown("\n".join(f"- {item}" for item in items))
 
 def render_profile_summary(profile: ResumeProfile) -> None:
     """Display the extracted profile in a compact, scannable layout."""

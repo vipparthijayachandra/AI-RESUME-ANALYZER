@@ -1,5 +1,5 @@
 """Streamlit entry point for ResumeIQ."""
-
+from app.dashboard.styles import load_custom_css
 from pathlib import Path
 import sys
 
@@ -28,7 +28,14 @@ from app.services.skill_recommender import recommend_skills
 
 def main() -> None:
     """Configure and render the ResumeIQ application shell."""
-    st.set_page_config(page_title="ResumeIQ", page_icon="📄", layout="wide")
+
+    st.set_page_config(
+        page_title="ResumeIQ",
+        page_icon="📄",
+        layout="wide",
+    )
+
+    load_custom_css()
     initialize_database()
 
     render_page_header()
